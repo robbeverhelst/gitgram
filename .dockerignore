@@ -1,0 +1,8 @@
+node_modules
+test
+docs
+.git
+.github
+.env
+.env.*
+gitgram.yaml

@@ -5,8 +5,8 @@
 
 <p align="center">
   <a href="https://github.com/robbeverhelst/gitgram/actions/workflows/ci.yml"><img src="https://github.com/robbeverhelst/gitgram/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://bun.sh"><img src="https://img.shields.io/badge/Bun-1.3-000?logo=bun&logoColor=white" alt="Bun"></a>
-  <a href="https://core.telegram.org/bots/api"><img src="https://img.shields.io/badge/Bot%20API-long%20polling-0969da" alt="Telegram Bot API"></a>
+  <a href="https://github.com/robbeverhelst/gitgram/releases"><img src="https://img.shields.io/github/v/release/robbeverhelst/gitgram?color=3fb950" alt="Release"></a>
+  <a href="https://github.com/robbeverhelst/gitgram/pkgs/container/gitgram"><img src="https://img.shields.io/badge/ghcr.io-multi--arch-blue?logo=docker&logoColor=white" alt="Docker"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT"></a>
 </p>
 
@@ -196,9 +196,20 @@ message.
 
 ## Deployment
 
-`docker build -t gitgram .` — mount `gitgram.yaml` at `CONFIG_PATH` and supply
-the environment. The container needs inbound HTTPS on `PORT` for the GitHub
-webhook; Telegram uses long polling and needs no inbound access.
+Multi-arch images (`linux/amd64`, `linux/arm64`) are published to
+`ghcr.io/robbeverhelst/gitgram` on every `v*` tag.
+
+```bash
+docker run --rm \
+  --env-file .env \
+  -v "$PWD/gitgram.yaml:/app/gitgram.yaml:ro" \
+  -p 3000:3000 \
+  ghcr.io/robbeverhelst/gitgram:latest
+```
+
+The container needs inbound HTTPS on `PORT` for the GitHub webhook; Telegram
+uses long polling and needs no inbound access. It holds no state, so it can be
+restarted or rescheduled freely — updates queue on Telegram's side meanwhile.
 
 ## Known limits
 

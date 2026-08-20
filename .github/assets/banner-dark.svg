@@ -1,0 +1,52 @@
+<svg width="1200" height="300" viewBox="0 0 1200 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="gitgram — react to a Telegram message, get a GitHub issue">
+  <defs>
+    <linearGradient id="flow" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#58a6ff" stop-opacity="0"/>
+      <stop offset="0.18" stop-color="#58a6ff"/>
+      <stop offset="0.46" stop-color="#58a6ff"/>
+      <stop offset="0.68" stop-color="#3fb950"/>
+      <stop offset="1" stop-color="#3fb950" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 150)">
+      <stop offset="0" stop-color="#58a6ff" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#3fb950" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- faint grid -->
+  <g stroke="#30363d" stroke-opacity="0.5" stroke-width="1">
+    <line x1="0" y1="75" x2="1200" y2="75"/>
+    <line x1="0" y1="150" x2="1200" y2="150"/>
+    <line x1="0" y1="225" x2="1200" y2="225"/>
+    <line x1="200" y1="0" x2="200" y2="300"/>
+    <line x1="400" y1="0" x2="400" y2="300"/>
+    <line x1="600" y1="0" x2="600" y2="300"/>
+    <line x1="800" y1="0" x2="800" y2="300"/>
+    <line x1="1000" y1="0" x2="1000" y2="300"/>
+  </g>
+
+  <!-- speech bubble with a reaction stuck to it -->
+  <g transform="translate(405 76)">
+    <rect x="0" y="0" width="96" height="68" rx="14" stroke="#e6edf3" stroke-width="5"/>
+    <path d="M22 68 L22 86 L44 68" stroke="#e6edf3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="34" cy="34" r="6" fill="#e6edf3"/>
+    <circle cx="62" cy="34" r="6" fill="#e6edf3"/>
+    <circle cx="96" cy="4" r="15" fill="#0d1117" stroke="#58a6ff" stroke-width="4"/>
+    <circle cx="91" cy="2" r="3" fill="#58a6ff"/>
+    <circle cx="101" cy="2" r="3" fill="#58a6ff"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="541" y="122" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="52" font-weight="700" fill="#e6edf3">git<tspan fill="#58a6ff">·</tspan>gram</text>
+
+  <!-- the pipe: a message resolves into an issue -->
+  <path d="M0 190 H262 l16 0 12 -14 14 28 12 -22 14 8 12 0 H600 l40 0" stroke="url(#flow)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M640 190 H1200" stroke="url(#flow)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 14"/>
+  <path d="M626 178 L642 190 L626 202" stroke="#3fb950" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="880" cy="190" r="17" fill="#0d1117" stroke="#3fb950" stroke-width="4"/>
+  <circle cx="880" cy="190" r="6" fill="#3fb950"/>
+  <rect x="0" y="150" width="1200" height="90" fill="url(#glow)"/>
+
+  <!-- tagline -->
+  <text x="600" y="252" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="21" fill="#8b949e">React to a Telegram message, get a GitHub issue</text>
+</svg>

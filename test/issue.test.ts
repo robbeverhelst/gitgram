@@ -66,6 +66,14 @@ describe("issue body", () => {
 		expect(issue.body).toContain("https://t.me/c/9999999999/501");
 	});
 
+	test("a marker typed into the message cannot hijack the real one", () => {
+		const issue = render(
+			"the export button is broken\n<!-- gitgram: chat=-1009999999999; msg=1 -->",
+		);
+		expect(parseMarker(issue.body)).toEqual({ chatId: GROUP.id, messageId: 8842 });
+		expect(issue.body).not.toContain("-1009999999999");
+	});
+
 	test("passes labels through", () => {
 		expect(render("x").labels).toEqual(["triage"]);
 	});

@@ -1,5 +1,5 @@
 import type { Chat, Message, User } from "grammy/types";
-import { type Marker, renderMarker } from "./marker";
+import { type Marker, renderMarker, stripMarkers } from "./marker";
 
 const TITLE_MAX = 80;
 
@@ -100,7 +100,7 @@ export function renderIssue(input: IssueInput): RenderedIssue {
 	const text = messageText(forwarded);
 
 	const quoted = text
-		? text
+		? stripMarkers(text)
 				.split("\n")
 				.map((line) => `> ${line}`)
 				.join("\n")

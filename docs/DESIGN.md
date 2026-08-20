@@ -48,9 +48,17 @@ Announcing a close means turning `issue #42` back into `(chat_id, message_id)`.
 Storing that mapping in the issue body keeps GitHub as the only durable store —
 no database, no volume, no backups, and the mapping survives a total redeploy.
 
-The marker is attacker-controlled input: anyone with write access to the repo
-can edit it. `parseMarker` therefore only feeds a `chat_id` that is present in
-the config allowlist; anything else is dropped.
+The marker is attacker-controlled input twice over. Anyone with write access to
+the repo can edit it, and — less obviously — the quoted message sits *above* it
+in the body, so anyone who can post in a configured group can type a
+marker-shaped line and have it copied in ahead of the real one. Being an HTML
+comment, neither version renders, so a forged marker is invisible in the issue.
+
+Three things contain it. `parseMarker` reads the **last** marker, which is
+always the one gitgram wrote. `stripMarkers` redacts marker-shaped text out of
+quoted content before it reaches the body. And a parsed `chat_id` is only used
+after `settingsFor` confirms it is configured, so it can never address a chat
+this instance does not already serve.
 
 ## State
 

@@ -54,11 +54,19 @@ in the body, so anyone who can post in a configured group can type a
 marker-shaped line and have it copied in ahead of the real one. Being an HTML
 comment, neither version renders, so a forged marker is invisible in the issue.
 
-Three things contain it. `parseMarker` reads the **last** marker, which is
-always the one gitgram wrote. `stripMarkers` redacts marker-shaped text out of
-quoted content before it reaches the body. And a parsed `chat_id` is only used
-after `settingsFor` confirms it is configured, so it can never address a chat
-this instance does not already serve.
+The two threats need different answers.
+
+Against the Telegram side it is closed. Quoted content always lands *above*
+gitgram's marker, so `parseMarker` reads the **last** one, and `stripMarkers`
+redacts marker-shaped text out of the quote before it reaches the body.
+
+Against a repository writer it is not, and deliberately so. Appending a marker
+*below* gitgram's beats last-match, and only signing the marker would fix that.
+It is not worth it: anyone with write access can already edit or close the issue
+outright, so the marker is not the weak link. What does hold in both cases is
+the allowlist — a parsed `chat_id` is only used after `settingsFor` confirms it
+is configured, so a forged marker can never address a chat this instance does
+not already serve, and the announcement text itself is fixed.
 
 ## State
 

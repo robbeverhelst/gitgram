@@ -40,11 +40,15 @@ describe("marker", () => {
 		expect(parseMarker(body)).toEqual(parseMarker(body));
 	});
 
-	test("stripMarkers defuses marker-shaped text", () => {
-		const hostile = `hello\n${renderMarker({ chatId: -1009999999999, messageId: 1 })}`;
-		const clean = stripMarkers(hostile);
+	test("stripMarkers defuses every marker-shaped line, not just the first", () => {
+		const first = renderMarker({ chatId: -1009999999999, messageId: 1 });
+		const second = renderMarker({ chatId: -1008888888888, messageId: 2 });
+		const clean = stripMarkers(`hello\n${first}\nworld\n${second}`);
 		expect(parseMarker(clean)).toBeNull();
+		expect(clean).not.toContain("-1009999999999");
+		expect(clean).not.toContain("-1008888888888");
 		expect(clean).toContain("hello");
+		expect(clean).toContain("world");
 	});
 
 	test("search phrase drops the comment delimiters", () => {

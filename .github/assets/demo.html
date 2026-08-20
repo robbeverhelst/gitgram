@@ -16,14 +16,14 @@
   }
   * { box-sizing: border-box; margin: 0; }
   body {
-    width: 900px; height: 270px; background: var(--bg); color: var(--ink);
+    width: 900px; height: 336px; background: var(--bg); color: var(--ink);
     font: 14px/1.45 ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
     display: grid; grid-template-columns: 386px 80px 386px; align-items: center;
     padding: 22px 24px; gap: 0; overflow: hidden;
   }
   .label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
   .label.tg { color: var(--blue); } .label.gh { color: var(--green); }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; height: 196px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; height: 262px; }
   .who { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
   .dot { width: 20px; height: 20px; border-radius: 50%; background: var(--blue); opacity: .85; }
   .dot.g { background: var(--green); }
@@ -31,6 +31,8 @@
   .bubble { background: var(--chip); border-radius: 4px 12px 12px 12px; padding: 10px 12px; display: inline-block; max-width: 300px; }
   .chips { display: flex; gap: 6px; margin-top: 10px; }
   .chip { border: 1px solid var(--line); background: var(--chip); border-radius: 999px; padding: 3px 10px; font-size: 15px; line-height: 1.2; }
+  .reply { margin-top: 14px; }
+  .reply .bubble { border-left: 3px solid var(--green); border-radius: 4px 12px 12px 4px; }
   .empty { color: var(--muted); font-size: 13px; padding-top: 20px; text-align: center; }
   .issue { display: flex; gap: 10px; align-items: flex-start; }
   .issue svg { flex: none; margin-top: 2px; }
@@ -47,13 +49,22 @@
       <div class="chip" id="eyes">👀</div>
       <div class="chip" id="ack">👌</div>
     </div>
+    <div class="reply" id="reply">
+      <div class="name">gitgram</div>
+      <div class="bubble">Ticket #42 filed by Robbe</div>
+    </div>
   </div>
 </div>
 
-<svg id="wire" width="80" height="223" viewBox="0 0 80 223">
-  <line x1="0" y1="125" x2="66" y2="125" stroke="var(--line)" stroke-width="2" stroke-dasharray="2 8"/>
-  <path d="M58 117 L70 125 L58 133" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle id="pulse" cx="0" cy="125" r="5" fill="var(--blue)"/>
+<svg id="wire" width="80" height="289" viewBox="0 0 80 289">
+  <!-- out: the message becomes an issue -->
+  <line x1="0" y1="146" x2="66" y2="146" stroke="var(--line)" stroke-width="2" stroke-dasharray="2 8"/>
+  <path d="M58 138 L70 146 L58 154" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle id="pulse" cx="0" cy="146" r="5" fill="var(--blue)"/>
+  <!-- back: the bot announces it in the chat -->
+  <line x1="14" y1="176" x2="80" y2="176" stroke="var(--line)" stroke-width="2" stroke-dasharray="2 8"/>
+  <path d="M22 168 L10 176 L22 184" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle id="pulseBack" cx="80" cy="176" r="5" fill="var(--green)"/>
 </svg>
 
 <div>
@@ -92,7 +103,7 @@
   };
 
   pop(eyes, 500, 900);
-  pop(ack, 2600, 3000);
+  pop(ack, 3300, 3700);
 
   const travel = at(1100, 2000);
   pulse.setAttribute("cx", travel * 66);
@@ -104,4 +115,14 @@
   empty.style.opacity = 1 - Math.min(1, born * 2);
   empty.style.display = born > 0.5 ? "none" : "block";
   issue.style.display = born > 0 ? "flex" : "none";
+
+  const back = at(2600, 3200);
+  pulseBack.setAttribute("cx", 80 - back * 66);
+  pulseBack.style.opacity = back > 0 && back < 1 ? 1 : 0;
+
+  // The bot announcing back into the chat — the other half of the round trip.
+  const said = at(3200, 3650);
+  reply.style.opacity = said;
+  reply.style.transform = `translateY(${(1 - said) * 6}px)`;
+  reply.style.visibility = said > 0 ? "visible" : "hidden";
 </script>

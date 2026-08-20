@@ -1,6 +1,6 @@
 {
 	"name": "gitgram",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "React to a Telegram message, get a GitHub issue.",
 	"type": "module",
 	"private": true,

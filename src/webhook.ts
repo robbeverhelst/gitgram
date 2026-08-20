@@ -3,7 +3,7 @@ import { Hono } from "hono";
 import type { Config } from "./config";
 import { settingsFor } from "./config";
 import { parseMarker } from "./marker";
-import type { TelegramPort } from "./ticket";
+import { type TelegramPort, withLink } from "./ticket";
 
 export type WebhookDeps = {
 	config: Config;
@@ -56,13 +56,14 @@ export async function announceClosed(deps: WebhookDeps, payload: IssuePayload): 
 	if (!settings.announce_closed) return "silent";
 
 	const by = payload.sender?.login ? ` by ${payload.sender.login}` : "";
-	await deps.telegram.sendMessage(
-		marker.chatId,
-		`Ticket #${issue.number} closed${by}: ${issue.html_url}`,
-		{
-			reply_parameters: { message_id: marker.messageId, allow_sending_without_reply: true },
-		},
+	const text = withLink(
+		`Ticket #${issue.number} closed${by}`,
+		issue.html_url,
+		settings.include_link,
 	);
+	await deps.telegram.sendMessage(marker.chatId, text, {
+		reply_parameters: { message_id: marker.messageId, allow_sending_without_reply: true },
+	});
 	deps.log?.({ event: "closed_announced", chatId: marker.chatId, issue: issue.number });
 	return "announced";
 }

@@ -14,6 +14,7 @@ const settingsShape = {
 	announce_created: z.boolean(),
 	announce_closed: z.boolean(),
 	ack_reaction: z.boolean(),
+	include_link: z.boolean(),
 	title_mode: z.enum(["mechanical", "llm"]),
 	labels: z.array(z.string()),
 };
@@ -33,6 +34,8 @@ const DEFAULTS = {
 	announce_created: true,
 	announce_closed: true,
 	ack_reaction: true,
+	// Off by default: the issue URL names the repo to everyone in the chat.
+	include_link: false,
 	title_mode: "mechanical",
 	labels: [],
 } satisfies Omit<Required<z.infer<typeof SettingsOverride>>, "repo">;

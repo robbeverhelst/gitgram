@@ -52,10 +52,24 @@ describe("issue closed → chat", () => {
 		expect(telegram.sent).toEqual([
 			{
 				chatId: GROUP.id,
-				text: "Ticket #42 closed by robbeverhelst: https://github.com/robbeverhelst/gitgram/issues/42",
+				text: "Ticket #42 closed by robbeverhelst",
 				replyTo: 8842,
 			},
 		]);
+	});
+
+	test("include_link puts the issue url back in the close message", async () => {
+		const telegram = fakeTelegram({});
+		const marker = renderMarker({ chatId: GROUP.id, messageId: 8842 });
+
+		await announceClosed(
+			{ config: config("    include_link: true"), telegram: telegram.port, secret: SECRET },
+			closedPayload(marker),
+		);
+
+		expect(telegram.sent[0]?.text).toBe(
+			"Ticket #42 closed by robbeverhelst: https://github.com/robbeverhelst/gitgram/issues/42",
+		);
 	});
 
 	test("a marker edited to point at an unconfigured chat is dropped", async () => {

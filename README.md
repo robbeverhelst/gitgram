@@ -72,6 +72,7 @@ than producing a bot that silently ignores you.
 | `announce_created` | `true` | post in the chat when a ticket is filed |
 | `announce_closed` | `true` | post in the chat when it is closed |
 | `ack_reaction` | `true` | bot adds `ACK_EMOJI` to the message |
+| `include_link` | `false` | put the issue URL in announcements — off by default because the URL names the repo to everyone in the chat |
 | `title_mode` | `mechanical` | `llm` is reserved, not implemented |
 | `labels` | `[]` | labels applied to created issues |
 

@@ -15,6 +15,10 @@ chats:
     # Bot adds ACK_EMOJI to the message so the reactor knows it landed.
     ack_reaction: true
 
+    # Put the issue URL in the announcement. Off by default: the URL names
+    # the repo to everyone in the chat.
+    include_link: false
+
     # mechanical | llm (llm is reserved, not implemented)
     title_mode: mechanical
 

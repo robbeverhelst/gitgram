@@ -59,8 +59,25 @@ describe("👀 → issue", () => {
 		expect(telegram.reacted).toEqual([
 			{ chatId: GROUP.id, messageId: 8842, reaction: [{ type: "emoji", emoji: "👌" }] },
 		]);
-		expect(telegram.sent[0]?.text).toContain("issues/42");
+		expect(telegram.sent[0]?.text).toBe("Ticket #42 filed by Bob");
 		expect(telegram.sent[0]?.replyTo).toBe(8842);
+	});
+
+	test("the issue link is opt-in, so the repo is not named in the chat", async () => {
+		const telegram = fakeTelegram({ forward: forwarded("broken") });
+		const github = fakeGitHub();
+
+		await handleTicketReaction(deps(config(), telegram, github.port), reaction());
+		expect(telegram.sent[0]?.text).not.toContain("github.com");
+
+		const loud = fakeTelegram({ forward: forwarded("broken") });
+		await handleTicketReaction(
+			deps(config("    include_link: true"), loud, fakeGitHub().port),
+			reaction(),
+		);
+		expect(loud.sent[0]?.text).toBe(
+			"Ticket #42 filed by Bob: https://github.com/robbeverhelst/gitgram/issues/42",
+		);
 	});
 
 	test("silent mode still acks but says nothing", async () => {
@@ -110,7 +127,7 @@ describe("👀 → issue", () => {
 			url: "https://github.com/x/y/issues/7",
 		});
 		expect(github.created).toEqual([]);
-		expect(telegram.sent[0]?.text).toContain("Already tracked");
+		expect(telegram.sent[0]?.text).toBe("Already tracked as #7");
 	});
 
 	test("admins-only rejects a plain member", async () => {

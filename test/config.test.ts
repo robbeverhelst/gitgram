@@ -22,6 +22,7 @@ describe("config", () => {
 			announce_created: true,
 			announce_closed: true,
 			ack_reaction: true,
+			include_link: false,
 			title_mode: "mechanical",
 			labels: [],
 		});

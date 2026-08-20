@@ -100,7 +100,12 @@ export async function handleTicketReaction(
 		const existing = await deps.github.findExisting(ref, marker);
 		if (existing) {
 			if (settings.announce_created) {
-				await reply(deps, chatId, messageId, `Already tracked: ${existing.url}`);
+				await reply(
+					deps,
+					chatId,
+					messageId,
+					withLink(`Already tracked as #${existing.number}`, existing.url, settings.include_link),
+				);
 			}
 			return { status: "existing", issue: existing.number, url: existing.url };
 		}
@@ -129,7 +134,12 @@ export async function handleTicketReaction(
 		}
 		if (settings.announce_created) {
 			const who = displayName(update.user ?? update.actor_chat);
-			await reply(deps, chatId, messageId, `Ticket #${issue.number} filed by ${who}: ${issue.url}`);
+			await reply(
+				deps,
+				chatId,
+				messageId,
+				withLink(`Ticket #${issue.number} filed by ${who}`, issue.url, settings.include_link),
+			);
 		}
 
 		deps.log?.({
@@ -149,6 +159,11 @@ export async function handleTicketReaction(
 		await reply(deps, chatId, messageId, `Couldn't file a ticket: ${message}`).catch(() => {});
 		return { status: "failed", error: message };
 	}
+}
+
+/** The issue URL names the repo to everyone in the chat, so it is opt-in. */
+export function withLink(text: string, url: string, include: boolean): string {
+	return include ? `${text}: ${url}` : text;
 }
 
 function describe(error: unknown): string {

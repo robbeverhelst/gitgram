@@ -48,9 +48,25 @@ Announcing a close means turning `issue #42` back into `(chat_id, message_id)`.
 Storing that mapping in the issue body keeps GitHub as the only durable store —
 no database, no volume, no backups, and the mapping survives a total redeploy.
 
-The marker is attacker-controlled input: anyone with write access to the repo
-can edit it. `parseMarker` therefore only feeds a `chat_id` that is present in
-the config allowlist; anything else is dropped.
+The marker is attacker-controlled input twice over. Anyone with write access to
+the repo can edit it, and — less obviously — the quoted message sits *above* it
+in the body, so anyone who can post in a configured group can type a
+marker-shaped line and have it copied in ahead of the real one. Being an HTML
+comment, neither version renders, so a forged marker is invisible in the issue.
+
+The two threats need different answers.
+
+Against the Telegram side it is closed. Quoted content always lands *above*
+gitgram's marker, so `parseMarker` reads the **last** one, and `stripMarkers`
+redacts marker-shaped text out of the quote before it reaches the body.
+
+Against a repository writer it is not, and deliberately so. Appending a marker
+*below* gitgram's beats last-match, and only signing the marker would fix that.
+It is not worth it: anyone with write access can already edit or close the issue
+outright, so the marker is not the weak link. What does hold in both cases is
+the allowlist — a parsed `chat_id` is only used after `settingsFor` confirms it
+is configured, so a forged marker can never address a chat this instance does
+not already serve, and the announcement text itself is fixed.
 
 ## State
 

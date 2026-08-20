@@ -122,11 +122,27 @@ put the App ID, the PEM (newlines escaped as `\n`) and the secret in `.env`.
 ```bash
 cp gitgram.example.yaml gitgram.yaml   # add your chat_id and repo
 echo 'ARCHIVE_CHAT_ID=-100...' >> .env
+```
+
+**With Docker:**
+
+```bash
+docker run --rm \
+  --env-file .env \
+  -v "$PWD/gitgram.yaml:/app/gitgram.yaml:ro" \
+  -p 3000:3000 \
+  ghcr.io/robbeverhelst/gitgram:latest
+```
+
+**From source:**
+
+```bash
+bun install
 bun run start
 ```
 
-Sanity-check with `/gitgram` in the group — it replies with the chat id and the
-resolved settings, or tells you the chat is not configured.
+Either way, sanity-check with `/gitgram` in the group — it replies with the chat
+id and the resolved settings, or tells you the chat is not configured.
 
 ## Configuration
 
@@ -197,15 +213,12 @@ message.
 ## Deployment
 
 Multi-arch images (`linux/amd64`, `linux/arm64`) are published to
-`ghcr.io/robbeverhelst/gitgram` on every `v*` tag.
+`ghcr.io/robbeverhelst/gitgram` on every `v*` tag — `latest`, plus `{major}`,
+`{major}.{minor}` and the full version. See [Quickstart](#5-configure-and-run)
+for the `docker run` invocation.
 
-```bash
-docker run --rm \
-  --env-file .env \
-  -v "$PWD/gitgram.yaml:/app/gitgram.yaml:ro" \
-  -p 3000:3000 \
-  ghcr.io/robbeverhelst/gitgram:latest
-```
+Mount `gitgram.yaml` at `CONFIG_PATH` (default `/app/gitgram.yaml`) and supply
+the secrets as environment variables.
 
 The container needs inbound HTTPS on `PORT` for the GitHub webhook; Telegram
 uses long polling and needs no inbound access. It holds no state, so it can be

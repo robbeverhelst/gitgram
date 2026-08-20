@@ -77,7 +77,18 @@ const stop = async () => {
 process.on("SIGINT", stop);
 process.on("SIGTERM", stop);
 
-await bot.start({
-	allowed_updates: ["message_reaction", "message", "my_chat_member"],
-	onStart: (me) => log({ event: "polling", bot: me.username }),
-});
+try {
+	await bot.start({
+		allowed_updates: ["message_reaction", "message", "my_chat_member"],
+		onStart: (me) => log({ event: "polling", bot: me.username }),
+	});
+} catch (error) {
+	// Every other bad input fails with a readable message; a rejected token
+	// should too, rather than crashlooping on a raw stack trace.
+	const raw = String(error);
+	log({
+		event: "fatal",
+		error: raw.includes("401") ? "Telegram rejected the bot token — check TELEGRAM_BOT_TOKEN" : raw,
+	});
+	process.exit(1);
+}

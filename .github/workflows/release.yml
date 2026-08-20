@@ -27,7 +27,7 @@ jobs:
       - run: bun run ci
 
       # arm64 is emulated; the homelab runs on it.
-      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-qemu-action@v4
       - uses: docker/setup-buildx-action@v4
       - uses: docker/login-action@v4
         with:

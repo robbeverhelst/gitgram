@@ -1,0 +1,28 @@
+# Chat routing. Run /gitgram in a group to get its chat_id.
+# Everything except `repo` is optional; defaults are shown.
+chats:
+  -1001234567890:
+    repo: robbeverhelst/gitgram
+
+    # anyone | admins | [123456789, 987654321]
+    authorize: anyone
+
+    # Post in the chat when a ticket is filed / closed.
+    # Both false = silent mode. Errors are still reported.
+    announce_created: true
+    announce_closed: true
+
+    # Bot adds ACK_EMOJI to the message so the reactor knows it landed.
+    ack_reaction: true
+
+    # mechanical | llm (llm is reserved, not implemented)
+    title_mode: mechanical
+
+    labels: []
+
+  # A second group filing into a different repo, silently.
+  -1009876543210:
+    repo: robbeverhelst/homelab
+    announce_created: false
+    announce_closed: false
+    labels: [from-telegram]

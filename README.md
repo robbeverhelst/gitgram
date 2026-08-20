@@ -20,6 +20,13 @@
 
 ---
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/demo-dark.gif">
+    <img src=".github/assets/demo.gif" alt="A message in a Telegram group, reacted to with 👀, becoming a GitHub issue" width="900">
+  </picture>
+</p>
+
 The bug report was already written. Someone typed it in the group chat three
 weeks ago, four people replied "yeah same", and then it scrolled away. Nobody
 was ever going to open the issue tracker and type it again.

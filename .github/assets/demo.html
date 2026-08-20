@@ -16,14 +16,14 @@
   }
   * { box-sizing: border-box; margin: 0; }
   body {
-    width: 900px; height: 336px; background: var(--bg); color: var(--ink);
+    width: 900px; height: 360px; background: var(--bg); color: var(--ink);
     font: 14px/1.45 ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
     display: grid; grid-template-columns: 386px 80px 386px; align-items: center;
     padding: 22px 24px; gap: 0; overflow: hidden;
   }
   .label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
   .label.tg { color: var(--blue); } .label.gh { color: var(--green); }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; height: 262px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; height: 286px; }
   .who { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
   .dot { width: 20px; height: 20px; border-radius: 50%; background: var(--blue); opacity: .85; }
   .dot.g { background: var(--green); }
@@ -56,15 +56,15 @@
   </div>
 </div>
 
-<svg id="wire" width="80" height="289" viewBox="0 0 80 289">
+<svg id="wire" width="80" height="313" viewBox="0 0 80 313">
   <!-- out: the message becomes an issue -->
-  <line x1="0" y1="146" x2="66" y2="146" stroke="var(--line)" stroke-width="2" stroke-dasharray="2 8"/>
-  <path d="M58 138 L70 146 L58 154" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle id="pulse" cx="0" cy="146" r="5" fill="var(--blue)"/>
+  <line x1="0" y1="158" x2="66" y2="158" stroke="var(--line)" stroke-width="2" stroke-dasharray="2 8"/>
+  <path d="M58 150 L70 158 L58 166" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle id="pulse" cx="0" cy="158" r="5" fill="var(--blue)"/>
   <!-- back: the bot announces it in the chat -->
-  <line x1="14" y1="176" x2="80" y2="176" stroke="var(--line)" stroke-width="2" stroke-dasharray="2 8"/>
-  <path d="M22 168 L10 176 L22 184" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle id="pulseBack" cx="80" cy="176" r="5" fill="var(--green)"/>
+  <line x1="14" y1="188" x2="80" y2="188" stroke="var(--line)" stroke-width="2" stroke-dasharray="2 8"/>
+  <path d="M22 180 L10 188 L22 196" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle id="pulseBack" cx="80" cy="188" r="5" fill="var(--green)"/>
 </svg>
 
 <div>

@@ -39,7 +39,7 @@ keep it that way when adding behaviour.
 
 - Keep comments short, and only where the code cannot say it itself — a
   non-obvious constraint, or why an obvious approach was rejected.
-- Import the narrowest named binding; Biome's `performance/noNamespaceImport`
+- Import the narrowest named binding; bun lint's `import/no-namespace`
   fails CI on namespace imports.
 - Anything parsed out of an issue body is attacker-controlled. `chat_id` from a
   marker is only usable after `settingsFor` confirms it is configured.

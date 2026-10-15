@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+
 import { messageKey, RecentSet } from "../src/dedup";
 
 describe("RecentSet", () => {

@@ -9,6 +9,7 @@
 		"includes": ["**/*.ts", "**/*.json", "!node_modules", "!renovate.json"]
 	},
 	"formatter": {
+		"enabled": false,
 		"indentStyle": "tab",
 		"lineWidth": 100
 	},
@@ -22,10 +23,6 @@
 		}
 	},
 	"assist": {
-		"actions": {
-			"source": {
-				"organizeImports": "on"
-			}
-		}
+		"enabled": false
 	}
 }

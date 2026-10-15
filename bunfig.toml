@@ -1,0 +1,22 @@
+# bun fmt settings. bun fmt is not in stable Bun yet, so it runs through the
+# pinned canary (bun@1.4.3-canary.20261014.1, see package.json); the Bun 1.4.3
+# runtime and tests ignore this section.
+#
+# Same options biome.json's formatter had (tabs, width 100, Biome's defaults
+# otherwise, which match bun fmt's). sortImports replaces Biome's
+# organizeImports.
+[fmt]
+useTabs = true
+printWidth = 100
+sortImports = true
+sortPackageJson = true
+# Biome skipped renovate.json and never formatted Markdown, HTML, YAML or TOML.
+ignorePatterns = [
+	"renovate.json",
+	"**/*.md",
+	"**/*.mdx",
+	"**/*.html",
+	"**/*.yml",
+	"**/*.yaml",
+	"**/*.toml",
+]

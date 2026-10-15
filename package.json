@@ -12,8 +12,9 @@
 		"fmt": "biome format --write .",
 		"fmt:check": "biome format .",
 		"check": "biome check .",
-		"typecheck": "tsc --noEmit",
-		"ci": "biome check . && tsc --noEmit && bun test"
+		"typecheck": "bun --bun tsc --noEmit",
+		"check:bun-native": "bun run scripts/check-bun-native.ts",
+		"ci": "bun run check:bun-native && biome check . && bun --bun tsc --noEmit && bun test"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.9",

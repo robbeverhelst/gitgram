@@ -18,7 +18,8 @@ jobs:
         with:
           bun-version-file: package.json
       - run: bun install --frozen-lockfile
-      - run: bun run lint
+      - run: bun run format:check
+      - run: bun run lint:check
       - run: bun run typecheck
       - run: bun run check:bun-native
       - run: bun test

@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+
 import { type Config, parseConfig } from "../src/config";
 import { RecentSet } from "../src/dedup";
 import { parseMarker } from "../src/marker";

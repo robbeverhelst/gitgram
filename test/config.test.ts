@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+
 import { isKnownChat, parseConfig, settingsFor } from "../src/config";
 
 const yaml = `

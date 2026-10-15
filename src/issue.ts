@@ -1,4 +1,5 @@
 import type { Chat, Message, User } from "grammy/types";
+
 import { type Marker, renderMarker, stripMarkers } from "./marker";
 
 const TITLE_MAX = 80;

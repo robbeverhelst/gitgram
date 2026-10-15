@@ -6,6 +6,7 @@ import type {
 	ReactionType,
 	User,
 } from "grammy/types";
+
 import type { Config } from "./config";
 import { settingsFor } from "./config";
 import { messageKey, type RecentSet } from "./dedup";

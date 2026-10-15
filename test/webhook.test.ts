@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+
 import { parseConfig } from "../src/config";
 import { renderMarker } from "../src/marker";
 import { announceClosed, createWebhookApp } from "../src/webhook";

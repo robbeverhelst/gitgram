@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+
 import { deriveTitle, messageLink, renderIssue } from "../src/issue";
 import { parseMarker } from "../src/marker";
 import { ALICE, ARCHIVE_CHAT_ID, BOB, forwarded, GROUP } from "./fixtures";

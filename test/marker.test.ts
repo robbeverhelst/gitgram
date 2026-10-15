@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+
 import { markerSearchPhrase, parseMarker, renderMarker, stripMarkers } from "../src/marker";
 
 describe("marker", () => {

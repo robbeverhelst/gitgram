@@ -45,3 +45,9 @@ keep it that way when adding behaviour.
   marker is only usable after `settingsFor` confirms it is configured.
 - Errors reply in the originating chat regardless of the announce toggles.
 - Config or env that fails validation must abort startup, never warn and continue.
+- Bun-native: use what Bun ships before adding an npm package (`bun test`,
+  `bun build`, `Bun.$`, `Bun.password`, `Bun.YAML`, built-in `.env` loading).
+  `bun run check:bun-native` fails CI when a replaceable package (Jest, Vitest,
+  tsx, ts-node, rimraf, esbuild, tsup, dotenv, argon2, js-yaml, Prettier,
+  ESLint, oxlint, oxfmt, husky, lint-staged) is added; a deliberate exception
+  goes in `ALLOWED` in `scripts/check-bun-native.ts`, with its reason.

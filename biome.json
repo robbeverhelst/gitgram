@@ -16,9 +16,53 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
+			"recommended": false,
+			"a11y": {
+				"recommended": true
+			},
+			"complexity": {
+				"noEmptyTypeParameters": "on",
+				"noFlatMapIdentity": "on",
+				"noThisInStatic": "on",
+				"noUselessContinue": "on",
+				"noUselessEscapeInRegex": "on",
+				"noUselessStringRaw": "on",
+				"noUselessThisAlias": "on",
+				"useArrowFunction": "on",
+				"useOptionalChain": "on",
+				"useSimpleNumberKeys": "on"
+			},
+			"correctness": {
+				"noConstantMathMinMaxClamp": "on",
+				"noStringCaseMismatch": "on",
+				"noUnusedFunctionParameters": "on",
+				"noUnusedImports": "on",
+				"noUnusedPrivateClassMembers": "on",
+				"noUnusedVariables": "on",
+				"noVoidTypeReturn": "on"
+			},
 			"performance": {
-				"noNamespaceImport": "error"
+				"noDynamicNamespaceImportAccess": "on"
+			},
+			"style": {
+				"useExportType": "on",
+				"useImportType": "on"
+			},
+			"suspicious": {
+				"noAssignInExpressions": "on",
+				"noBiomeFirstException": "on",
+				"noConfusingLabels": "on",
+				"noConstEnum": "on",
+				"noEmptyInterface": "on",
+				"noGlobalIsFinite": "on",
+				"noGlobalIsNan": "on",
+				"noImplicitAnyLet": "on",
+				"noQuickfixBiome": "on",
+				"noRedeclare": "on",
+				"noRedundantUseStrict": "on",
+				"noTsIgnore": "on",
+				"noUselessEscapeInString": "on",
+				"useBiomeIgnoreFolder": "on"
 			}
 		}
 	},

@@ -8,13 +8,14 @@
 		"start": "bun run src/index.ts",
 		"dev": "bun --watch src/index.ts",
 		"test": "bun test",
-		"lint": "biome lint .",
 		"format": "bunx bun@1.4.3-canary.20261014.1 fmt .",
 		"format:check": "bunx bun@1.4.3-canary.20261014.1 fmt --check .",
-		"check": "biome check .",
+		"lint:check": "bunx bun@1.4.3-canary.20261014.1 lint . && biome lint .",
+		"lint:fix": "bunx bun@1.4.3-canary.20261014.1 lint --fix . && biome lint --write .",
+		"check": "bun run format:check && bun run lint:check && bun run typecheck",
 		"typecheck": "bun --bun tsc --noEmit",
 		"check:bun-native": "bun run scripts/check-bun-native.ts",
-		"ci": "bun run check:bun-native && biome check . && bun --bun tsc --noEmit && bun test"
+		"ci": "bun run check:bun-native && bun run format:check && bun run lint:check && bun --bun tsc --noEmit && bun test"
 	},
 	"dependencies": {
 		"@octokit/auth-app": "^8.3.0",

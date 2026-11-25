@@ -20,7 +20,7 @@ permissions:
 jobs:
   checks:
     name: Lint, typecheck, test
-    runs-on: arc-gitgram
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
@@ -35,7 +35,7 @@ jobs:
 
   docker:
     name: Docker build
-    runs-on: arc-gitgram
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
       - uses: docker/setup-buildx-action@v4
